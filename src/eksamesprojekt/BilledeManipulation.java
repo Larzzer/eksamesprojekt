@@ -13,7 +13,7 @@ public class BilledeManipulation extends JPanel {
 
     public BilledeManipulation() {
        try {
-           OriginalImage = ImageIO.read(new File("C:\\Users\\lars\\OneDrive\\Desktop\\Kom IT reklame\\umar_der_ser_sød_ud.jpg"));
+           OriginalImage = ImageIO.read(new File("C:\\Users\\lars\\OneDrive\\Desktop\\Programmering eksamensbillede\\umar_der_ser_sd_ud.jpg"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -33,7 +33,9 @@ public class BilledeManipulation extends JPanel {
         g.dispose();
         return b;
     }
-
+    
+    
+    
 
     public static void Blur() {
         float[][] BlurMatrix = {{0,0.2f,0},{0.2f,0.2f,0.2f},{0,0.2f,0}};

@@ -1,17 +1,20 @@
 package eksamesprojekt;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JSlider;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class GUI extends JFrame {
 
 	public JPanel contentPane;
-
+	 private BilledeManipulation imagePanel;
+	 
 	/**
 	 * Launch the application.
 	 */
@@ -39,13 +42,16 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		BilledeManipulation imagePanel = new BilledeManipulation();
+	    imagePanel.setBounds(105, 10, 677, 493); // set the bounds of the panel to fit the frame
+	    contentPane.add(imagePanel); // add the panel to the contentPane
 		
 		
 		//					BLUR				//
 		JButton btn_Blur = new JButton("Blur");
 		btn_Blur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						
+				
 			}
 		});
 		btn_Blur.setBounds(10, 10, 85, 21);
