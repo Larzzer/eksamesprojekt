@@ -55,6 +55,32 @@ public class BilledeManipulation extends JPanel {
 	    int width = TempImage.getWidth();
 	    int height = TempImage.getHeight();   
 	   
+	    for(int y = 0; y < height; y++) {
+	        for(int x = 0; x < width; x++) {
+	            int pixel = TempImage.getRGB(x, y);
+
+	            int alpha = (pixel>>24)&0xff;
+	            int red = (pixel>>16)&0xff;
+	            int green = (pixel>>8)&0xff;
+	            int blue = pixel&0xff;
+
+	            //Apply matrix to each color component separately
+	            red = (int)(red*matrix[0][0] + green*matrix[0][1] + blue*matrix[0][2]);
+	            green = (int)(red*matrix[1][0] + green*matrix[1][1] + blue*matrix[1][2]);
+	            blue = (int)(red*matrix[2][0] + green*matrix[2][1] + blue*matrix[2][2]);
+
+	            //clamp values to [0, 255]
+	            red = Math.min(255, Math.max(0, red));
+	            green = Math.min(255, Math.max(0, green));
+	            blue = Math.min(255, Math.max(0, blue));
+
+	            //Combine color components back into a single pixel
+	            int newPixel = (alpha<<24) | (red<<16) | (green<<8) | blue;
+	            TempImage.setRGB(x, y, newPixel);
+	        }
+	    }
+
+	    DisplayImage = TempImage;
    } 
     
 } 
