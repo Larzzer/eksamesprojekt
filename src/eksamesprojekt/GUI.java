@@ -63,6 +63,7 @@ public class GUI extends JFrame {
 		JButton btn_Lysning = new JButton("Lysning");
 		btn_Lysning.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btn_Lysning.setBounds(10, 50, 85, 21);
@@ -73,6 +74,7 @@ public class GUI extends JFrame {
 		JButton btn_Sharpen = new JButton("Sharpen");
 		btn_Sharpen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btn_Sharpen.setBounds(10, 90, 85, 21);
@@ -120,9 +122,10 @@ public class GUI extends JFrame {
 		contentPane.add(slider);
 		
 		
-		//BilledeManipulation panel = new BilledeManipulation();
-		JPanel panel = new JPanel();
+	/*	BilledeManipulation panel = new BilledeManipulation();
+		float[][] output = panel.ApplyMatrix([], BilledeManipulation.Blur);
+		//JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 784, 525);
-		contentPane.add(panel);
+		contentPane.add(panel);*/
 	}
 }
