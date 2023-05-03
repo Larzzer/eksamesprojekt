@@ -53,7 +53,7 @@ public class GUI extends JFrame {
 		btn_Blur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				imagePanel.Blur(); // apply the Blur function
-			    imagePanel.repaint(); // update the display with the modified image
+			    
 			}
 		});
 		btn_Blur.setBounds(10, 10, 85, 21);
@@ -65,7 +65,7 @@ public class GUI extends JFrame {
 		JButton btn_Lysning = new JButton("Lysning");
 		btn_Lysning.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				imagePanel.Lysning(); // apply the Lysning function
 			}
 		});
 		btn_Lysning.setBounds(10, 50, 85, 21);
@@ -76,7 +76,7 @@ public class GUI extends JFrame {
 		JButton btn_Sharpen = new JButton("Sharpen");
 		btn_Sharpen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				imagePanel.Lysning(); // apply the Sharpen function
 			}
 		});
 		btn_Sharpen.setBounds(10, 90, 85, 21);
@@ -84,24 +84,48 @@ public class GUI extends JFrame {
 	
 		
 		
+		JButton Grey_scale = new JButton("GreyScale");
+		Grey_scale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagePanel.Grayscale();
+			}
+		});
+		Grey_scale.setBounds(10, 130, 85, 21);
+		contentPane.add(Grey_scale);
+		
+		JButton RedScale = new JButton("RedScale");
+		RedScale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagePanel.RedScale();
+			}
+		});
+		RedScale.setBounds(10, 170, 85, 21);
+		contentPane.add(RedScale);
+		
+
+		JButton GreenScale = new JButton("GreenScale");
+		GreenScale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagePanel.GreenScale();
+			}
+		});
+		GreenScale.setBounds(10, 250, 85, 21);
+		contentPane.add(GreenScale);
 		
 		
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(10, 130, 85, 21);
-		contentPane.add(btnNewButton_3);
+		JButton BlueScale = new JButton("BlueScale");
+		BlueScale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagePanel.BlueScale();
+			}
+		});
+		BlueScale.setBounds(10, 290, 85, 21);
+		contentPane.add(BlueScale);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		btnNewButton_4.setBounds(10, 170, 85, 21);
-		contentPane.add(btnNewButton_4);
 		
-		JButton btnNewButton_6 = new JButton("New button");
-		btnNewButton_6.setBounds(10, 250, 85, 21);
-		contentPane.add(btnNewButton_6);
 		
-		JButton btnNewButton_7 = new JButton("New button");
-		btnNewButton_7.setBounds(10, 290, 85, 21);
-		contentPane.add(btnNewButton_7);
+		
 		
 		JButton btnNewButton_8 = new JButton("New button");
 		btnNewButton_8.setBounds(10, 330, 85, 21);
@@ -115,9 +139,15 @@ public class GUI extends JFrame {
 		btnNewButton_10.setBounds(10, 410, 85, 21);
 		contentPane.add(btnNewButton_10);
 		
-		JButton btnNewButton_11 = new JButton("Reset");
-		btnNewButton_11.setBounds(10, 450, 85, 21);
-		contentPane.add(btnNewButton_11);
+		JButton Reset = new JButton("Reset");
+		Reset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagePanel.Reset();
+			}
+		});
+		Reset.setBounds(10, 450, 85, 21);
+		
+		contentPane.add(Reset);
 		
 		JSlider slider = new JSlider();
 		slider.setBounds(10, 210, 85, 22);
