@@ -1,4 +1,5 @@
 package eksamesprojekt;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,8 @@ public class GUI extends JFrame {
 		JButton btn_Blur = new JButton("Blur");
 		btn_Blur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				imagePanel.Blur(); // apply the Blur function
+			    imagePanel.repaint(); // update the display with the modified image
 			}
 		});
 		btn_Blur.setBounds(10, 10, 85, 21);
@@ -122,10 +124,10 @@ public class GUI extends JFrame {
 		contentPane.add(slider);
 		
 		
-	/*	BilledeManipulation panel = new BilledeManipulation();
-		float[][] output = panel.ApplyMatrix([], BilledeManipulation.Blur);
-		//JPanel panel = new JPanel();
+		BilledeManipulation panel = new BilledeManipulation();
+		//float[][] output = panel.ApplyMatrix([], BilledeManipulation.Blur);
+		// JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 784, 525);
-		contentPane.add(panel);*/
+		contentPane.add(panel);
 	}
 }

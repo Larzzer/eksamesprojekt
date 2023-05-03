@@ -7,13 +7,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class BilledeManipulation extends JPanel {
-    private static BufferedImage OriginalImage;
-    private static BufferedImage DisplayImage;
-    private static BufferedImage TempImage;
+	private BufferedImage OriginalImage;
+	private BufferedImage DisplayImage;
 
+	
+	public final static float[][] BlurMatrix = new float[][] {{0,0.2f,0},{0.2f,0.2f,0.2f},{0,0.2f,0}};
+	
+	public final static float[][] SharpenMatrix = new float[][] {{0,-0.2f,0},{-0.2f,-1f,-0.2f},{0,-0.2f,0}};
+	
+	public final static float[][] LysningMatrix = new float[][] {{0,0.2f,0},{0.2f,0.2f,0.2f},{0,0.2f,0}};
+	
     public BilledeManipulation() {
-       try {
-           OriginalImage = ImageIO.read(new File("C:\\Users\\lars\\OneDrive\\Desktop\\Kom IT reklame\\umar_der_ser_sød_ud.jpg"));
+       try {                
+    	   OriginalImage = ImageIO.read(new File("C:\\Users\\lars\\OneDrive\\Desktop\\Kom IT reklame\\umar_der_ser_sød_ud.jpg"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -22,7 +28,7 @@ public class BilledeManipulation extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(OriginalImage,0,0, this.getWidth(), this.getHeight(), this); // see javadoc for more info on the parameters
+        g.drawImage(OriginalImage,0,0, this.getWidth(), this.getHeight(), this); // see javadoc for more info on the parameters            
     }
 
     //Stackoverflow (https://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage) How do you clone a bufferedimage?
@@ -35,44 +41,45 @@ public class BilledeManipulation extends JPanel {
     }
     
     
-    
-
-    public static void Blur() {
-        float[][] BlurMatrix = {{0,0.2f,0},{0.2f,0.2f,0.2f},{0,0.2f,0}};
-
-    }
-
-    public static void Sharpen() {
-        float[][] SharpenMatrix = {{0,-0.2f,0},{-0.2f,-1f,-0.2f},{0,-0.2f,0}};
- 
-    }
-
-    public static void Lysning() {
-        float[][] LysningMatrix = {{0,0.2f,0},{0.2f,0.2f,0.2f},{0,0.2f,0}};
- 
+    public void Blur() {
+    	ApplyMatrix(BlurMatrix);
     }
     
-   public void ApplyMatrix(float[][] matrix) {
-	   TempImage = copyImage(OriginalImage);
-	    int width = TempImage.getWidth();
-	    int height = TempImage.getHeight();   
-	   
-	    for(int y = 0; y < height; y++) {
-	        for(int x = 0; x < width; x++) {
-	            int pixel = TempImage.getRGB(x, y);
-
-	            int red = (pixel>>16)&0xff;
-	            int green = (pixel>>8)&0xff;
-	            int blue = pixel&0xff;
-
-	            //Combine color components back into a single pixel
-	            int newPixel = (red<<16) | (green<<8) | blue;
-	            TempImage.setRGB(x, y, newPixel);
-	        }
-	    }
-
-	    DisplayImage = TempImage;
-	    repaint();
-   } 
+    public void Sharpen() {
+    	ApplyMatrix(BlurMatrix);
+    }
     
-} 
+    public void Lysning() {
+    	ApplyMatrix(BlurMatrix);
+    }
+
+    
+    public void ApplyMatrix(float[][] filter) {
+        BufferedImage TempImage;
+
+        TempImage = copyImage(OriginalImage);
+        int width = TempImage.getWidth();
+        int height = TempImage.getHeight();
+
+        float[][] output = new float[width][height];
+        for (int y = 1; y < height - 1; y++) {
+            for (int x = 1; x < width - 1; x++) {
+                float sumR = 0, sumG = 0, sumB = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        int pixel = TempImage.getRGB(x + i, y + j);
+
+                        float factor = filter[i + 1][j + 1];
+                        sumR += factor * ((pixel >> 16) & 0xff);
+                        sumG += factor * ((pixel >> 8) & 0xff);
+                        sumB += factor * (pixel & 0xff);
+                    }
+                }
+                int newPixel = ((int) sumR << 16) | ((int) sumG << 8) | (int) sumB;
+                TempImage.setRGB(x, y, newPixel);
+            }
+        }
+        DisplayImage = copyImage(TempImage);
+        repaint();
+    }
+}
